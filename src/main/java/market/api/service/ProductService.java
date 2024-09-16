@@ -8,11 +8,17 @@ import market.api.requests.ProductPostRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Log4j2
 public class ProductService {
     private final ProductsRepository productsRepository;
+
+    public List<Products> listAll(){
+        return productsRepository.findAll();
+    }
 
     @Transactional(rollbackFor = Exception.class)
     public Products save(ProductPostRequest productPostRequest){
