@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,6 @@ public class Products {
     @NotEmpty(message = "The product name cannot be empty")
     private String name;
 
-    @NotEmpty(message = "The product quantity cannot be empty")
+    @Min(value = 1, message = "The minimum quantity must be 1")
     private Long quantity;
 }
