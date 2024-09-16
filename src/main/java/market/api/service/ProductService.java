@@ -3,8 +3,10 @@ package market.api.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import market.api.domain.Products;
+import market.api.exception.BadRequestException;
 import market.api.repository.ProductsRepository;
 import market.api.requests.ProductPostRequest;
+import market.api.requests.ProductPutRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,12 +18,16 @@ import java.util.List;
 public class ProductService {
     private final ProductsRepository productsRepository;
 
-    public List<Products> listAll(){
+    public List<Products> listAll() {
         return productsRepository.findAll();
     }
 
+    public List<Products> findByName(String name) {
+        return productsRepository.findByName(name);
+    }
+
     @Transactional(rollbackFor = Exception.class)
-    public Products save(ProductPostRequest productPostRequest){
+    public Products save(ProductPostRequest productPostRequest) {
         Products products = Products.builder()
                 .name(productPostRequest.getName())
                 .quantity(productPostRequest.getQuantity())
@@ -29,5 +35,21 @@ public class ProductService {
         return productsRepository.save(products);
     }
 
+    public Products findByIdOrThrowBadRequestException(long id) {
+        return productsRepository.findById(id).orElseThrow(() -> new BadRequestException("Product now found"));
+    }
 
+    public void delete(long id) {
+        productsRepository.delete(findByIdOrThrowBadRequestException(id));
+    }
+
+    public void replace(ProductPutRequest productPutRequest) {
+        Products savedProduct = findByIdOrThrowBadRequestException(productPutRequest.getId());
+        Products products = Products.builder()
+                .name(productPutRequest.getName())
+                .quantity(productPutRequest.getQuantity())
+                .build();
+        products.setId(savedProduct.getId());
+        productsRepository.save(products);
+    }
 }
