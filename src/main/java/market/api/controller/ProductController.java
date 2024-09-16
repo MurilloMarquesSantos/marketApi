@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Log4j2
 public class ProductController {
+
     private final ProductService productService;
 
     @GetMapping("/products")
@@ -46,8 +47,5 @@ public class ProductController {
         productService.replace(productPutRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
-
 
 }

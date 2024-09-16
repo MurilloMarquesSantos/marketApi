@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import market.api.domain.Products;
 import market.api.exception.BadRequestException;
+import market.api.mapper.ProductMapper;
 import market.api.repository.ProductsRepository;
 import market.api.requests.ProductPostRequest;
 import market.api.requests.ProductPutRequest;
@@ -28,10 +29,7 @@ public class ProductService {
 
     @Transactional(rollbackFor = Exception.class)
     public Products save(ProductPostRequest productPostRequest) {
-        Products products = Products.builder()
-                .name(productPostRequest.getName())
-                .quantity(productPostRequest.getQuantity())
-                .build();
+        Products products = ProductMapper.INSTANCE.toProduct(productPostRequest);
         return productsRepository.save(products);
     }
 
@@ -45,10 +43,7 @@ public class ProductService {
 
     public void replace(ProductPutRequest productPutRequest) {
         Products savedProduct = findByIdOrThrowBadRequestException(productPutRequest.getId());
-        Products products = Products.builder()
-                .name(productPutRequest.getName())
-                .quantity(productPutRequest.getQuantity())
-                .build();
+        Products products = ProductMapper.INSTANCE.toProduct(productPutRequest);
         products.setId(savedProduct.getId());
         productsRepository.save(products);
     }
