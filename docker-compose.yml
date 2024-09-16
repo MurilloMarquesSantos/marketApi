@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  db:
+    image: mysql
+    container_name: mysqlMarket
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - market_data:/var/lib/mysql
+
+volumes:
+  market_data:
