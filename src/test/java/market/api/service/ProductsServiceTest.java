@@ -94,6 +94,16 @@ class ProductsServiceTest {
     }
 
     @Test
+    @DisplayName("findByName returns empty list when name is not found")
+    void findByName_ReturnsEmptyList_WhenNameIsNotFound() {
+        BDDMockito.when(productsRepositoryMock.findByName(ArgumentMatchers.anyString()))
+                .thenReturn(List.of());
+        List<Products> emptyProductList = productsService.findByName("");
+
+        assertThat(emptyProductList).isEmpty();
+    }
+
+    @Test
     @DisplayName("save returns saved product when successful")
     void save_ReturnsSavedProduct_WhenSuccessful() {
 
