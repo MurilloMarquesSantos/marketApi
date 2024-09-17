@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductPutRequest {
+public class ProductsPutRequest {
     @NotNull(message = "ID cannot be null")
     @Min(value = 1, message = "ID must be greater than or equal to 1")
     private Long id;

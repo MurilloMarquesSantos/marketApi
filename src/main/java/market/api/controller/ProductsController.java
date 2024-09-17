@@ -4,9 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import market.api.domain.Products;
-import market.api.requests.ProductPostRequest;
-import market.api.requests.ProductPutRequest;
-import market.api.service.ProductService;
+import market.api.requests.ProductsPostRequest;
+import market.api.requests.ProductsPutRequest;
+import market.api.service.ProductsService;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,9 +20,9 @@ import java.util.List;
 @RequestMapping("market")
 @RequiredArgsConstructor
 @Log4j2
-public class ProductController {
+public class ProductsController {
 
-    private final ProductService productService;
+    private final ProductsService productService;
 
     @GetMapping("/products")
     public ResponseEntity<Page<Products>> list(@ParameterObject Pageable pageable) {
@@ -40,7 +40,7 @@ public class ProductController {
     }
 
     @PostMapping("/products/add")
-    public ResponseEntity<Products> save(@RequestBody @Valid ProductPostRequest productPostRequest) {
+    public ResponseEntity<Products> save(@RequestBody @Valid ProductsPostRequest productPostRequest) {
         return new ResponseEntity<>(productService.save(productPostRequest), HttpStatus.CREATED);
     }
 
@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     @PutMapping("/products/update")
-    public ResponseEntity<Void> replace(@RequestBody @Valid ProductPutRequest productPutRequest) {
+    public ResponseEntity<Void> replace(@RequestBody @Valid ProductsPutRequest productPutRequest) {
         productService.replace(productPutRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

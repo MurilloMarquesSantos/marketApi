@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductPostRequest {
+public class ProductsPostRequest {
     @NotEmpty(message = "The product name cannot be empty")
     private String name;
 
