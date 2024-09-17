@@ -8,6 +8,8 @@ import market.api.mapper.ProductMapper;
 import market.api.repository.ProductsRepository;
 import market.api.requests.ProductPostRequest;
 import market.api.requests.ProductPutRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +21,11 @@ import java.util.List;
 public class ProductService {
     private final ProductsRepository productsRepository;
 
-    public List<Products> listAll() {
+    public Page<Products> listAll(Pageable pageable) {
+        return productsRepository.findAll(pageable);
+    }
+
+    public List<Products> listAllNonPageable() {
         return productsRepository.findAll();
     }
 

@@ -7,6 +7,9 @@ import market.api.domain.Products;
 import market.api.requests.ProductPostRequest;
 import market.api.requests.ProductPutRequest;
 import market.api.service.ProductService;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +25,13 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Products>> listAll() {
-        return ResponseEntity.ok(productService.listAll());
+    public ResponseEntity<Page<Products>> list(@ParameterObject Pageable pageable) {
+        return ResponseEntity.ok(productService.listAll(pageable));
+    }
+
+    @GetMapping("/products/list")
+    public ResponseEntity<List<Products>> listAllNonPageable() {
+        return ResponseEntity.ok(productService.listAllNonPageable());
     }
 
     @GetMapping("/products/find")
@@ -37,13 +45,13 @@ public class ProductController {
     }
 
     @DeleteMapping("/products/delete/{id}")
-    public ResponseEntity<Void> delete(@PathVariable long id){
+    public ResponseEntity<Void> delete(@PathVariable long id) {
         productService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/products/update")
-    public ResponseEntity<Void> replace(@RequestBody @Valid ProductPutRequest productPutRequest){
+    public ResponseEntity<Void> replace(@RequestBody @Valid ProductPutRequest productPutRequest) {
         productService.replace(productPutRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
