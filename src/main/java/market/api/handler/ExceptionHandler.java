@@ -1,5 +1,6 @@
 package market.api.handler;
 
+import market.api.exception.ExceptionDetails;
 import market.api.exception.ValidationExceptionDetails;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,19 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
                         .fieldsMessages(fieldMessage)
                         .build(), HttpStatus.BAD_REQUEST
         );
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleExceptionInternal(
+            Exception ex, Object body, @Nullable HttpHeaders headers, HttpStatusCode statusCode, @Nullable WebRequest request) {
+        ExceptionDetails exceptionDetails = ExceptionDetails.builder()
+                .timestamp(LocalDateTime.now())
+                .title(ex.getCause().getMessage())
+                .status(HttpStatus.valueOf(statusCode.value()))
+                .details(ex.getMessage())
+                .developersMessage(ex.getClass().getName())
+                .build();
+        return new ResponseEntity<>(exceptionDetails, headers, statusCode);
 
     }
 }
