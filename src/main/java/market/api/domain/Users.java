@@ -9,18 +9,21 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
-@Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "tb_user")
-public class User implements UserDetails {
-
+@Data
+@Builder
+@Entity(name = "tb_users")
+public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -33,7 +36,6 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> roles;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

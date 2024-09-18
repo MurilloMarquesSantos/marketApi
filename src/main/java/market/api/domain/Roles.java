@@ -16,7 +16,6 @@ import org.springframework.security.core.GrantedAuthority;
 @NoArgsConstructor
 @Entity(name = "tb_roles")
 public class Roles implements GrantedAuthority {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,4 +26,5 @@ public class Roles implements GrantedAuthority {
     public String getAuthority() {
         return name;
     }
+
 }
