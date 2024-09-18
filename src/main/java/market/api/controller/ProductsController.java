@@ -39,6 +39,11 @@ public class ProductsController {
         return ResponseEntity.ok(productService.findByName(name));
     }
 
+    @GetMapping("/products/find/{id}")
+    public ResponseEntity<Products> findById(@PathVariable long id) {
+        return ResponseEntity.ok(productService.findByIdOrThrowBadRequestException(id));
+    }
+
     @PostMapping("/products/add")
     public ResponseEntity<Products> save(@RequestBody @Valid ProductsPostRequest productPostRequest) {
         return new ResponseEntity<>(productService.save(productPostRequest), HttpStatus.CREATED);
