@@ -1,6 +1,7 @@
 package market.api.handler;
 
 import market.api.exception.ExceptionDetails;
+import market.api.exception.SQLExceptionDetails;
 import market.api.exception.ValidationExceptionDetails;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,15 +11,30 @@ import org.springframework.lang.Nullable;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
-public class ExceptionHandler extends ResponseEntityExceptionHandler {
+public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<SQLExceptionDetails> handleSQLException(SQLException sql) {
+        return new ResponseEntity<>(
+                SQLExceptionDetails.builder()
+                        .timestamp(LocalDateTime.now())
+                        .status(HttpStatus.BAD_REQUEST)
+                        .title("SQL EXCEPTION")
+                        .details(sql.getMessage())
+                        .developersMessage(sql.getClass().getName())
+                        .build(), HttpStatus.BAD_REQUEST
+        );
+
+    }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
