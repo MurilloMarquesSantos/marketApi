@@ -10,6 +10,7 @@ import java.util.Set;
 public class UserCreator {
 
     private static Set<Roles> roles = new HashSet<>(List.of(new Roles(1L, "ROLE_ADMIN")));
+    private static Set<Roles> roleUser = new HashSet<>(List.of(new Roles(2L, "ROLE_USER")));
 
     public static Users createValidUser() {
         return Users.builder()
@@ -18,6 +19,16 @@ public class UserCreator {
                 .username("Murillo")
                 .password("marques")
                 .roles(roles)
+                .build();
+    }
+
+    public static Users createValidUserRoleUser() {
+        return Users.builder()
+                .id(1L)
+                .name("Murillo")
+                .username("Murillo")
+                .password("marques")
+                .roles(roleUser)
                 .build();
     }
 

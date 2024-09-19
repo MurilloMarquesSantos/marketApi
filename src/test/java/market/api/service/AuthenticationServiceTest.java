@@ -14,11 +14,9 @@ import org.mockito.Mock;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static market.api.util.NewUserAdminRequestCreator.createValidUserAdmin;
-import static market.api.util.NewUserAdminRequestCreator.createValidUserAdminWithoutPrefix;
+import static market.api.util.NewUserAdminRequestCreator.*;
 import static market.api.util.NewUserRequestCreator.createValidUserDefaultRole;
-import static market.api.util.UserCreator.createValidUser;
-import static market.api.util.UserCreator.createValidUserDefault;
+import static market.api.util.UserCreator.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -85,6 +83,26 @@ class AuthenticationServiceTest {
         Users validUser = createValidUser();
 
         Users savedUser = authService.createAccountAdmin(createValidUserAdminWithoutPrefix());
+
+        assertThat(savedUser).isNotNull().isEqualTo(validUser);
+
+    }
+
+    @Test
+    @DisplayName("createAccountAdmin insert role as \"ROLE_USER\" if role is empty")
+    void createAccountAdmin_AddRoleAsUser_IfRoleIsEmpty() {
+        BDDMockito.when(roleServiceMock.getRoleByName(ArgumentMatchers.anyString()))
+                .thenReturn(new Roles(2L, "ROLE_USER"));
+
+        BDDMockito.when(passwordEncoderMock.encode(ArgumentMatchers.anyString()))
+                .thenReturn("marques");
+
+        when(userRepositoryMock.save(ArgumentMatchers.any(Users.class)))
+                .thenReturn(createValidUserRoleUser());
+
+        Users validUser = createValidUserRoleUser();
+
+        Users savedUser = authService.createAccountAdmin(createValidUserWithEmptyRole());
 
         assertThat(savedUser).isNotNull().isEqualTo(validUser);
 

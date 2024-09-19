@@ -22,7 +22,10 @@ public class AuthenticationService {
     @Transactional(rollbackFor = Exception.class)
     public Users createAccountAdmin(NewUserAccountRequestAdmin request) {
         String roleName = request.getRoleName();
-        if (!request.getRoleName().startsWith("ROLE_")) {
+        if (roleName.isEmpty()) {
+            roleName += "ROLE_USER";
+        }
+        if (!roleName.startsWith("ROLE_")) {
             roleName = "ROLE_" + roleName;
         }
         Users user = UsersMapper.INSTANCE.toUser(request);

@@ -1,6 +1,7 @@
 package market.api.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -30,7 +30,7 @@ public class Users implements UserDetails {
 
     @Column(nullable = false, unique = true)
     private String password;
-
+    @NotEmpty(message = "The user must have a role")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

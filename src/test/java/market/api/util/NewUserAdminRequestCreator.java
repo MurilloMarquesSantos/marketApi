@@ -22,4 +22,13 @@ public class NewUserAdminRequestCreator {
                 .build();
     }
 
+    public static NewUserAccountRequestAdmin createValidUserWithEmptyRole() {
+        return NewUserAccountRequestAdmin.builder()
+                .name("Murillo")
+                .username("Murillo")
+                .password("marques")
+                .roleName("")
+                .build();
+    }
+
 }
