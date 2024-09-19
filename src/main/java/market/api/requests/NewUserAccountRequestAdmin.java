@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewUserAccountRequest {
+public class NewUserAccountRequestAdmin {
 
     private String name;
     private String username;
     private String password;
-    private String roleName = "ROLE_USER";
+    private String roleName;
 }

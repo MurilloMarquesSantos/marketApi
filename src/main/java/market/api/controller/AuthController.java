@@ -2,6 +2,7 @@ package market.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import market.api.requests.NewUserAccountRequest;
+import market.api.requests.NewUserAccountRequestAdmin;
 import market.api.service.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/market/auth")
+@RequestMapping("market")
 public class AuthController {
 
-    private final AuthenticationService service;
+    private final AuthenticationService authService;
 
-    @PostMapping
+    @PostMapping("/account/register")
     public ResponseEntity<String> createAccount(@RequestBody NewUserAccountRequest request) {
-        service.createAccount(request);
+        authService.createAccount(request);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+    @PostMapping("/admin/account/register")
+    public ResponseEntity<String> createAccountAdmin(@RequestBody NewUserAccountRequestAdmin request) {
+        authService.createAccountAdmin(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
