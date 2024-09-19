@@ -1,7 +1,6 @@
 package market.api.config;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import market.api.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +19,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 @EnableWebSecurity
 @RequiredArgsConstructor
-@Log4j2
 public class SecurityConfig {
 
     private final UserService userService;
@@ -29,8 +27,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/market/admin/user").hasRole("ADMIN")
+                        .requestMatchers("/market/account/register").permitAll()
+                        .requestMatchers("/market/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
+                .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }
