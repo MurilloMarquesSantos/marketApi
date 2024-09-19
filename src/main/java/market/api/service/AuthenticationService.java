@@ -19,12 +19,12 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional(rollbackFor = Exception.class)
-    public void createAccountAdmin(NewUserAccountRequestAdmin request) {
+    public Users createAccountAdmin(NewUserAccountRequestAdmin request) {
         String roleName = request.getRoleName();
         if (!request.getRoleName().startsWith("ROLE_")) {
             roleName = "ROLE_" + roleName;
         }
-        userRepository.save(Users.builder()
+        return userRepository.save(Users.builder()
                 .name(request.getName())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -33,9 +33,9 @@ public class AuthenticationService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void createAccount(NewUserAccountRequest request) {
+    public Users createAccount(NewUserAccountRequest request) {
         String defaultRole = "ROLE_USER";
-        userRepository.save(Users.builder()
+        return userRepository.save(Users.builder()
                 .name(request.getName())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
