@@ -1,7 +1,6 @@
 package market.api.service;
 
 import lombok.RequiredArgsConstructor;
-import market.api.domain.Products;
 import market.api.domain.Users;
 import market.api.exception.BadRequestException;
 import market.api.repository.UserRepositoryImpl;
