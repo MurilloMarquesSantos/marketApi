@@ -39,5 +39,7 @@ public class UserService implements UserDetailsService {
 
     public void delete(long id) {
         userRepository.delete(findByIdOrThrowBadRequestException(id));
+
+
     }
 }

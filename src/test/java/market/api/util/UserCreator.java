@@ -41,4 +41,12 @@ public class UserCreator {
                 .build();
     }
 
+    public static Users createValidUserToBeSaved() {
+        return Users.builder()
+                .name("Murillo")
+                .username("Murillo")
+                .password("marques")
+                .roles(roles)
+                .build();
+    }
 }

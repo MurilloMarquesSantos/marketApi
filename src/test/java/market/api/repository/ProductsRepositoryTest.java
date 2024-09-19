@@ -134,21 +134,13 @@ class ProductsRepositoryTest {
 
         Products savedProduct = productsRepository.save(productToBeSaved);
 
-        String name = savedProduct.getName();
-
-        Long quantity = savedProduct.getQuantity();
-
         Optional<Products> productId = productsRepository.findById(savedProduct.getId());
 
         Products products = productId.get();
 
         assertThat(productId).isNotEmpty();
 
-        assertThat(products.getQuantity()).isEqualTo(quantity);
-
-        assertThat(products.getName()).isEqualTo(name);
-
-        assertThat(products.getId()).isEqualTo(savedProduct.getId());
+        assertThat(products).isEqualTo(savedProduct);
 
     }
 }
