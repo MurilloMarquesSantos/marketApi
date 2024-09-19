@@ -2,6 +2,7 @@ package market.api.service;
 
 import lombok.RequiredArgsConstructor;
 import market.api.domain.Users;
+import market.api.mapper.UsersMapper;
 import market.api.repository.UserRepositoryImpl;
 import market.api.requests.NewUserAccountRequest;
 import market.api.requests.NewUserAccountRequestAdmin;
@@ -24,23 +25,35 @@ public class AuthenticationService {
         if (!request.getRoleName().startsWith("ROLE_")) {
             roleName = "ROLE_" + roleName;
         }
-        return userRepository.save(Users.builder()
+        Users user = UsersMapper.INSTANCE.toUser(request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRoles(Collections.singleton(roleService.getRoleByName(roleName)));
+        Users savedUser = userRepository.save(user);
+        return Users.builder()
+                .id(savedUser.getId())
                 .name(request.getName())
                 .username(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .roles(Collections.singleton(
-                        roleService.getRoleByName(roleName))).build());
+                .password(request.getPassword())
+                .roles(savedUser.getRoles())
+                .build();
+
     }
 
     @Transactional(rollbackFor = Exception.class)
     public Users createAccount(NewUserAccountRequest request) {
         String defaultRole = "ROLE_USER";
-        return userRepository.save(Users.builder()
+
+        Users user = UsersMapper.INSTANCE.toUser(request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRoles(Collections.singleton(roleService.getRoleByName(defaultRole)));
+        Users savedUser = userRepository.save(user);
+        return Users.builder()
+                .id(savedUser.getId())
                 .name(request.getName())
                 .username(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .roles(Collections.singleton(
-                        roleService.getRoleByName(defaultRole))).build());
+                .password(request.getPassword())
+                .roles(savedUser.getRoles())
+                .build();
     }
 
 }

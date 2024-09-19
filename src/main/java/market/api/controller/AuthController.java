@@ -21,7 +21,7 @@ public class AuthController {
 
     @PostMapping("/account/register")
     public ResponseEntity<Users> createAccount(@RequestBody NewUserAccountRequest request) {
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(authService.createAccount(request), HttpStatus.CREATED);
     }
 
     @PostMapping("/admin/account/register")
