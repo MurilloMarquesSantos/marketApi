@@ -19,7 +19,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 @EnableWebSecurity
 @RequiredArgsConstructor
+@SuppressWarnings("java:S116")
 public class SecurityConfig {
+
+    private final String[] ADMIN_ENDPOINTS = {
+            "/market/admin/**",
+            "/market/products/add",
+            "/market/products/delete/{id}",
+            "market/products/update"
+    };
 
 
     @Bean
@@ -27,7 +35,7 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/market/account/register").permitAll()
-                        .requestMatchers("/market/admin/**").hasRole("ADMIN")
+                        .requestMatchers(ADMIN_ENDPOINTS).hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
