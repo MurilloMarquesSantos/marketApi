@@ -2,9 +2,9 @@ package market.api.util;
 
 import market.api.requests.ProductsPutRequest;
 
-import static market.api.util.ProductCreator.createValidProduct;
+import static market.api.util.ProductsCreator.createValidProduct;
 
-public class ProductPutRequestCreator {
+public class ProductsPutRequestCreator {
 
     public static ProductsPutRequest createValidPutProduct() {
         return ProductsPutRequest.builder()

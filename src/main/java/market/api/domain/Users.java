@@ -30,7 +30,6 @@ public class Users implements UserDetails {
 
     @Column(nullable = false, unique = true)
     private String password;
-    @NotEmpty(message = "The user must have a role")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

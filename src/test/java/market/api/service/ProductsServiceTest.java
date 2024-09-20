@@ -20,10 +20,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static market.api.util.ProductCreator.createValidProduct;
-import static market.api.util.ProductPostRequestCreator.createInvalidPostProduct;
-import static market.api.util.ProductPostRequestCreator.createValidPostProduct;
-import static market.api.util.ProductPutRequestCreator.createValidPutProduct;
+import static market.api.util.ProductsCreator.createValidProduct;
+import static market.api.util.ProductsPostRequestCreator.createInvalidPostProduct;
+import static market.api.util.ProductsPostRequestCreator.createValidPostProduct;
+import static market.api.util.ProductsPutRequestCreator.createValidPutProduct;
 import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)

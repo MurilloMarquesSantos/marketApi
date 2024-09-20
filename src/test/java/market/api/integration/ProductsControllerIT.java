@@ -31,8 +31,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static market.api.util.ProductCreator.createValidProduct;
-import static market.api.util.ProductPostRequestCreator.createValidPostProduct;
+import static market.api.util.ProductsCreator.createValidProduct;
+import static market.api.util.ProductsPostRequestCreator.createValidPostProduct;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -101,8 +101,8 @@ class ProductsControllerIT {
         rolesRepository.save(new Roles(1L, "ROLE_ADMIN"));
         rolesRepository.save(new Roles(2L, "ROLE_USER"));
 
-        Products savedProduct = productsRepository.save(createValidProduct());
         userRepository.save(USER);
+        Products savedProduct = productsRepository.save(createValidProduct());
         String expectedName = savedProduct.getName();
 
         PageableResponse<Products> productsPage = testRestTemplateRoleUser.exchange("/market/products", HttpMethod.GET, null,
@@ -165,6 +165,7 @@ class ProductsControllerIT {
     void findByName_ReturnsEmptyList_WhenProductIsNotFound() {
         rolesRepository.save(new Roles(1L, "ROLE_ADMIN"));
         rolesRepository.save(new Roles(2L, "ROLE_USER"));
+
         userRepository.save(USER);
 
         List<Products> productsList = testRestTemplateRoleUser.exchange("/market/products/find?name=x",

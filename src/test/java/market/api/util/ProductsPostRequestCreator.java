@@ -2,10 +2,10 @@ package market.api.util;
 
 import market.api.requests.ProductsPostRequest;
 
-import static market.api.util.ProductCreator.createInvalidProduct;
-import static market.api.util.ProductCreator.createValidProductToBeSaved;
+import static market.api.util.ProductsCreator.createInvalidProduct;
+import static market.api.util.ProductsCreator.createValidProductToBeSaved;
 
-public class ProductPostRequestCreator {
+public class ProductsPostRequestCreator {
 
     public static ProductsPostRequest createValidPostProduct() {
         return ProductsPostRequest.builder()

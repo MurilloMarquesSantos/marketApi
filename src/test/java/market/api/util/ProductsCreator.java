@@ -2,7 +2,7 @@ package market.api.util;
 
 import market.api.domain.Products;
 
-public class ProductCreator {
+public class ProductsCreator {
 
     public static Products createValidProduct() {
         return Products.builder()
