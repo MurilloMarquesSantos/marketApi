@@ -1,7 +1,7 @@
 package market.api.controller;
 
 import market.api.domain.Users;
-import market.api.service.UserService;
+import market.api.service.UsersService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,10 +24,10 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 class UserControllerTest {
 
     @InjectMocks
-    private UserController userController;
+    private UsersController userController;
 
     @Mock
-    private UserService userServiceMock;
+    private UsersService userServiceMock;
 
     @BeforeEach
     void setUp() {

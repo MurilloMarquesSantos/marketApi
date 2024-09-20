@@ -12,9 +12,14 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class NewUserAccountRequestAdmin {
+    @NotEmpty(message = "The user must have a name")
     private String name;
+
+    @NotEmpty(message = "The user must have a username")
     private String username;
+
+    @NotEmpty(message = "The user must have a password")
     private String password;
-    @NotEmpty(message = "The user must have a role")
+
     private String roleName;
 }

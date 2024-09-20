@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RolesRepositoryImplTest {
 
     @Autowired
-    RolesRepositoryImpl rolesRepository;
+    RolesRepository rolesRepository;
 
     @Test
     @DisplayName("findByName returns Optional of Roles when successful")

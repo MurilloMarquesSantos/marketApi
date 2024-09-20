@@ -13,4 +13,14 @@ public class NewUserRequestCreator {
 
     }
 
+    public static NewUserAccountRequest createValidUserRoleUser() {
+        return NewUserAccountRequest.builder()
+                .name("William")
+                .username("William")
+                .password("Suane")
+                .roleName("ROLE_USER")
+                .build();
+
+    }
+
 }

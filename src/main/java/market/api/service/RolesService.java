@@ -3,16 +3,16 @@ package market.api.service;
 import lombok.RequiredArgsConstructor;
 import market.api.domain.Roles;
 import market.api.exception.BadRequestException;
-import market.api.repository.RolesRepositoryImpl;
+import market.api.repository.RolesRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class RoleService {
+public class RolesService {
 
-    private final RolesRepositoryImpl rolesRepository;
+    private final RolesRepository rolesRepository;
 
     public Roles getRoleByName(String name) {
         Roles role = rolesRepository.findByName(name).orElse(null);

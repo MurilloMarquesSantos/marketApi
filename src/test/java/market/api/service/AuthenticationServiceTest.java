@@ -2,7 +2,7 @@ package market.api.service;
 
 import market.api.domain.Roles;
 import market.api.domain.Users;
-import market.api.repository.UserRepositoryImpl;
+import market.api.repository.UsersRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,10 +27,10 @@ class AuthenticationServiceTest {
     private AuthenticationService authService;
 
     @Mock
-    private UserRepositoryImpl userRepositoryMock;
+    private UsersRepository userRepositoryMock;
 
     @Mock
-    private RoleService roleServiceMock;
+    private RolesService roleServiceMock;
 
     @Mock
     private PasswordEncoder passwordEncoderMock;

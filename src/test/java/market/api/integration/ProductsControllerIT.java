@@ -4,8 +4,8 @@ import market.api.domain.Products;
 import market.api.domain.Roles;
 import market.api.domain.Users;
 import market.api.repository.ProductsRepository;
-import market.api.repository.RolesRepositoryImpl;
-import market.api.repository.UserRepositoryImpl;
+import market.api.repository.RolesRepository;
+import market.api.repository.UsersRepository;
 import market.api.requests.ProductsPostRequest;
 import market.api.wrapper.PageableResponse;
 import org.junit.jupiter.api.DisplayName;
@@ -52,10 +52,10 @@ class ProductsControllerIT {
     private ProductsRepository productsRepository;
 
     @Autowired
-    private UserRepositoryImpl userRepository;
+    private UsersRepository userRepository;
 
     @Autowired
-    private RolesRepositoryImpl rolesRepository;
+    private RolesRepository rolesRepository;
 
     private static final Set<Roles> roles = new HashSet<>(List.of(new Roles(1L, "ROLE_ADMIN")));
     private static final Set<Roles> roleUser = new HashSet<>(List.of(new Roles(2L, "ROLE_USER")));
@@ -105,7 +105,8 @@ class ProductsControllerIT {
         Products savedProduct = productsRepository.save(createValidProduct());
         String expectedName = savedProduct.getName();
 
-        PageableResponse<Products> productsPage = testRestTemplateRoleUser.exchange("/market/products", HttpMethod.GET, null,
+        PageableResponse<Products> productsPage = testRestTemplateRoleUser.exchange(
+                "/market/products", HttpMethod.GET, null,
                 new ParameterizedTypeReference<PageableResponse<Products>>() {
                 }).getBody();
 

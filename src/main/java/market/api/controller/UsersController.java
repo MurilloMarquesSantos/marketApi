@@ -2,7 +2,7 @@ package market.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import market.api.domain.Users;
-import market.api.service.UserService;
+import market.api.service.UsersService;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,14 +15,13 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("market/admin/user")
-public class UserController {
+public class UsersController {
 
-    private final UserService userService;
+    private final UsersService userService;
 
     @GetMapping
     public ResponseEntity<Page<Users>> listAll(@ParameterObject Pageable pageable) {
         return ResponseEntity.ok(userService.listAll(pageable));
-
     }
 
     @GetMapping("/list")

@@ -2,7 +2,7 @@ package market.api.service;
 
 import market.api.domain.Roles;
 import market.api.exception.BadRequestException;
-import market.api.repository.RolesRepositoryImpl;
+import market.api.repository.RolesRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,10 +24,10 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class RoleServiceTest {
 
     @InjectMocks
-    private RoleService roleService;
+    private RolesService roleService;
 
     @Mock
-    private RolesRepositoryImpl rolesRepositoryMock;
+    private RolesRepository rolesRepositoryMock;
 
     @BeforeEach
     void setUp() {

@@ -3,7 +3,7 @@ package market.api.service;
 import lombok.RequiredArgsConstructor;
 import market.api.domain.Users;
 import market.api.exception.BadRequestException;
-import market.api.repository.UserRepositoryImpl;
+import market.api.repository.UsersRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,8 +15,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserDetailsService {
-    private final UserRepositoryImpl userRepository;
+public class UsersService implements UserDetailsService {
+    private final UsersRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class UserRepositoryImplTest {
 
     @Autowired
-    private UserRepositoryImpl userRepository;
+    private UsersRepository userRepository;
 
     @Test
     @DisplayName("findByUsername returns Optional of User when successful")

@@ -3,7 +3,7 @@ package market.api.service;
 import lombok.RequiredArgsConstructor;
 import market.api.domain.Users;
 import market.api.mapper.UsersMapper;
-import market.api.repository.UserRepositoryImpl;
+import market.api.repository.UsersRepository;
 import market.api.requests.NewUserAccountRequest;
 import market.api.requests.NewUserAccountRequestAdmin;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,8 +15,8 @@ import java.util.Collections;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UserRepositoryImpl userRepository;
-    private final RoleService roleService;
+    private final UsersRepository userRepository;
+    private final RolesService roleService;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional(rollbackFor = Exception.class)
