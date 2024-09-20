@@ -4,6 +4,8 @@ server:
 
 
 spring:
+  application:
+    name: marketApi
   datasource:
     url: jdbc:mysql://127.0.0.1:3307/market?createDatabaseIfNotExist=true
     username: root
@@ -26,7 +28,9 @@ management:
     web:
       exposure:
         include: info, health, metrics, prometheus
-
+  metrics:
+    tags:
+      application: ${spring.application.name}
 info:
   app: Market System Api
   github: https://github.com/MurilloMarquesSantos/marketApi
