@@ -18,3 +18,16 @@ logging:
       hibernate:
         SQL: DEBUG
 
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics, prometheus
+
+info:
+  app: Market System Api
+  github: https://github.com/MurilloMarquesSantos/marketApi
+

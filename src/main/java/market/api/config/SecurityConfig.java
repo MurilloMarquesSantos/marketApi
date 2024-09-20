@@ -28,12 +28,18 @@ public class SecurityConfig {
             "market/products/update"
     };
 
+    private final String[] ALLOWED_ENDPOINTS = {
+            "/market/account/register",
+            "/actuator/**"
+
+    };
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/market/account/register").permitAll()
+                        .requestMatchers(ALLOWED_ENDPOINTS).permitAll()
                         .requestMatchers(ADMIN_ENDPOINTS).hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())
