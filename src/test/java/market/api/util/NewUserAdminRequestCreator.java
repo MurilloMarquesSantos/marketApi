@@ -7,7 +7,7 @@ public class NewUserAdminRequestCreator {
     public static NewUserAccountRequestAdmin createValidUserAdmin() {
         return NewUserAccountRequestAdmin.builder()
                 .name("Murillo")
-                .username("Marques")
+                .username("Murillo")
                 .password("marques")
                 .roleName("ROLE_ADMIN")
                 .build();
