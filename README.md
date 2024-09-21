@@ -68,7 +68,7 @@
 
 <h2>Usage</h2>
 <h3>Swagger API Documentation</h3>
-<p>To view the API documentation, run the application and navigate to: <br><code>http://localhost:8080/swagger-ui.html</code><br>All endpoints include detailed summaries and descriptions.</p>
+<p>To view the API documentation, add a user to database and then run the application and navigate to: <br><code>http://localhost:8080/swagger-ui.html</code><br>All endpoints include detailed summaries and descriptions.</p>
 
 <h3>Prometheus Monitoring</h3>
 <p>Prometheus can be accessed at: <br><code>http://localhost:9090/</code></p>
